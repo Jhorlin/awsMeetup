@@ -91,7 +91,7 @@ if (!process.env.EB_NODE_COMMAND) {
         .delete(function (req, res, next) {
             var id = req.params.id;
         });
-    app.use(rosterRounter);
+    app.use('/roster',rosterRounter);
 
     module.exports = app;
 

@@ -4,3 +4,5 @@ dist
 .sass-cache
 bower_components
 app/test/bower_components
+
+.elasticbeanstalk/
