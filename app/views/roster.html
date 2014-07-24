@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="card col-md-12">
+
+        <div class="row">
+            <button class=" btn btn-primary btn-lg" data-ng-click="addMember()">Add Member</button>
+        </div>
+
+    </div>
+    <div class="member card col-md-12" data-ng-repeat="member in members">
+        <paper-shadow>
+            <div class="row">
+                <div class="col-md-12 text-center drop-zone" data-drop-zone="member.upload" data-drop-preview="member.preview">
+                    <img data-ng-src="{{member.preview || member.pic || 'images/meetup.jpg'}}" alt="" class="img-rounded">
+                </div>
+            </div>
+            <div class="row">
+                <paper-input class="col-md-6 col-md-offset-0 col-sm-8 col-sm-offset-2 col-xs-offset-1 col-xs-10" ng-model="member.first" label="First Name" floatingLabel="true"></paper-input>
+                <paper-input class="col-md-6 col-md-offset-0 col-sm-8 col-sm-offset-2 col-xs-offset-1 col-xs-10" ng-model="member.last" label="Last Name" floatingLabel="true"></paper-input>
+                <paper-input class="col-md-6 col-md-offset-0 col-sm-8 col-sm-offset-2 col-xs-offset-1 col-xs-10" ng-model="member.company" label="Company" floatingLabel="true"></paper-input>
+                <paper-input required class="col-md-6 col-md-offset-0 col-sm-8 col-sm-offset-2 col-xs-offset-1 col-xs-10" ng-model="member.email" label="e-mail" floatingLabel="true"></paper-input>
+            </div>
+            <div class="row">
+                <span class="col-md-12 text-center"><h3>Why did you join?</h3></span>
+                <paper-checkbox class="check-space col-md-6 col-offset-3" value="developer" label="Developer" paper-checked-array="member.reasons"></paper-checkbox>
+                <paper-checkbox class="check-space col-md-6 col-offset-3" value="admin" label="System Admin" paper-checked-array="member.reasons"></paper-checkbox>
+                <paper-checkbox class="check-space col-md-6 col-offset-3" value="techie" label="Enjoy Tech" paper-checked-array="member.reasons"></paper-checkbox>
+                <paper-checkbox class="check-space col-md-6 col-offset-3" value="hungry" label="Free Food" paper-checked-array="member.reasons"></paper-checkbox>
+            </div>
+            <div data-ng-if="member.new" class="row">
+                <button data-ng-disabled="!member.email" data-ng-click="save(member)" class="col-xs-2 btn btn-success">Save</button>
+                <button data-ng-click="cancel(member)" class="col-xs-2 col-xs-push-8 btn btn-danger">Cancel</button>
+            </div>
+            <div data-ng-if="!member.new" class="row">
+                <button data-ng-click="update(member)" class="col-xs-2 btn btn-warning">Update</button>
+            </div>
+        </paper-shadow>
+    </div>
+</div>
