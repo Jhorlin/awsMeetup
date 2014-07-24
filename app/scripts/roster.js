@@ -6,8 +6,8 @@
                 .when('/', {templateUrl: 'views/roster.html', controller: 'Roster', resolve:{members:['members',function(members){
                     return members.get();
                 }]}})
-                .when('/members/:id', {templateUrl: 'views/members.html', controller: 'Member', resolve:{member:['$route', 'member',function($route, member){
-                    return member.get($route.params.id);
+                .when('/members/:id', {templateUrl: 'views/member.html', controller: 'Member', resolve:{member:['$route', 'member',function($route, member){
+                    return member.get($route.current.params.id);
                 }]}})
                 .when('/404', {templateUrl: 'views/404.html'})
                 .otherwise({redirectTo: '404'});
@@ -93,7 +93,9 @@
                     });
 
                     function update(values) {
-                        element.attr('checked', values.indexOf(value)!== -1);
+                        if(values){
+                            element.attr('checked', values.indexOf(value)!== -1);
+                        }
                     }
 
                     element.on('change', function(e){
@@ -157,7 +159,6 @@
         .factory('members', ['$http','$q',function($http, $q){
             return {
                 get:function(){
-                    debugger;
                     return $http.get('/members').then(function(result){
                         if(result.status !== 200){
                             return $q.reject(result);
