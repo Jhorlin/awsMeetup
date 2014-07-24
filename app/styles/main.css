@@ -121,6 +121,10 @@ core-toolbar {
     margin-top: 20px;
 }
 
+html, body {
+    min-height:100%;
+}
+
 body{
     /* can be treated like a fallback */
     background-color: #95dfff;

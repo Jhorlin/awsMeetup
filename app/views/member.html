@@ -2,7 +2,7 @@
     <div class="member card col-md-12 dn-fade-down" data-ng-class="{new:member.new}">
         <paper-shadow>
             <div class="row">
-                <div class="col-md-12 text-center drop-zone" data-drop-zone="member.upload" data-drop-preview="member.preview">
+                <div class="col-md-12 text-center"  data-drop-preview="member.preview">
                     <img data-ng-src="{{member.preview || member.pic || 'images/meetup.jpg'}}" alt="" class="img-rounded">
                 </div>
             </div>
@@ -17,7 +17,7 @@
                 <paper-checkbox disabled class="check-space col-md-6 col-offset-3" value="developer" label="Developer" paper-checked-array="member.reasons"></paper-checkbox>
                 <paper-checkbox disabled class="check-space col-md-6 col-offset-3" value="admin" label="System Admin" paper-checked-array="member.reasons"></paper-checkbox>
                 <paper-checkbox disabled class="check-space col-md-6 col-offset-3" value="techie" label="Enjoy Tech" paper-checked-array="member.reasons"></paper-checkbox>
-                <paper-checkbox disabled class="check-space col-md-6 col-offset-3" value="hungry" label="Free Food" paper-checked-array="member.reasons"></paper-checkbox>
+                <paper-checkbox disabled class="check-space col-md-6 col-offset-3" value="thirsty" label="Free Beer" paper-checked-array="member.reasons"></paper-checkbox>
             </div>
         </paper-shadow>
     </div>

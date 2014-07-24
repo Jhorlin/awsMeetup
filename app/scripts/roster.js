@@ -53,7 +53,7 @@
 
             };
         }])
-        .controller('Member', ['$scope', '$route', function ($scope, $route, member) {
+        .controller('Member', ['$scope', '$route','member', function ($scope, $route, member) {
            $scope.member = member;
         }])
         .directive('paperInput', ['$sce', function ($sce) {
