@@ -120,3 +120,27 @@ core-toolbar {
 .member{
     margin-top: 20px;
 }
+
+body{
+    /* can be treated like a fallback */
+    background-color: #95dfff;
+
+    /* will be "on top", if browser supports it */
+    background-image: linear-gradient(  #95dfff, white);
+
+    /* these will reset other properties, like background-position, but it does know what you mean */
+    background:   #95dfff;
+    background: linear-gradient(  #95dfff, white);
+}
+
+.new{
+    /* can be treated like a fallback */
+    background-color: #6fff3b;
+
+    /* will be "on top", if browser supports it */
+    background-image: linear-gradient(  #6fff3b, white);
+
+    /* these will reset other properties, like background-position, but it does know what you mean */
+    background:   #6fff3b;
+    background: linear-gradient(  #6fff3b, white);
+}

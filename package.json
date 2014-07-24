@@ -2,6 +2,7 @@
   "name": "awsmeetup",
   "version": "0.0.0",
   "dependencies": {
+    "angular-animate": "^1.2.16",
     "aws-sdk": "^2.0.8",
     "body-parser": "^1.5.0",
     "dataobject-parser": "^1.0.2",

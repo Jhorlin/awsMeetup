@@ -1,32 +1,27 @@
-(function (angular, Polymer) {
+(function (angular) {
     "use strict";
     angular.module('roster', ['ngRoute'])
-        .config(['$routeProvider', function ($routeProvider, Polymer) {
+        .config(['$routeProvider', function ($routeProvider) {
             $routeProvider
-                .when('/', {templateUrl: 'views/roster.html', controller: 'Roster'})
-                .when('/members/:id', {templateUrl: 'views/members.html', controller: 'Member'})
+                .when('/', {templateUrl: 'views/roster.html', controller: 'Roster', resolve:{members:['members',function(members){
+                    return members.get();
+                }]}})
+                .when('/members/:id', {templateUrl: 'views/members.html', controller: 'Member', resolve:{member:['$route', 'member',function($route, member){
+                    return member.get($route.params.id);
+                }]}})
                 .when('/404', {templateUrl: 'views/404.html'})
                 .otherwise({redirectTo: '404'});
         }])
         .controller('App', ['$scope', function ($scope) {
 
         }])
-        .controller('Roster', ['$scope', function ($scope) {
+        .controller('Roster', ['$scope','members','member', function ($scope, members, member) {
             $scope.view = 'roster';
             $scope.test = "jhorlin";
-            $scope.member = {
-                first: 'Jhorlin',
-                last: 'De Armas',
-                company: 'riptide',
-                reasons: ['developer'],
-                pic:undefined,
-                upload:undefined,
-                preview:undefined
-            };
 
-            $scope.members = [];
+            $scope.members = members;
 
-            $scope.addMember = function(member){
+            $scope.addMember = function(){
                 $scope.members.unshift({
                    // first: 'Jhorlin',
                    // last: 'De Armas',
@@ -40,21 +35,26 @@
                 });
             };
 
-            $scope.save = function(member){
-
+            $scope.save = function(m){
+                m.saving = true;
+                member.add(m.email, m).then(function(){
+                    m.new = false;
+                }, function(){
+                    m.error = "Unable to save!!!";
+                    m.saving = false;
+                });
             };
-            $scope.cancel = function(member){
-              var index = $scope.members.indexOf(member);
+            $scope.cancel = function(m){
+              var index = $scope.members.indexOf(m);
                 $scope.members.splice(index,1);
             };
 
-            $scope.update = function(member){
+            $scope.update = function(m){
 
             };
         }])
-        .controller('Member', ['$scope', '$route', function ($scope, $route) {
-            $scope.view = 'member';
-            $scope.id = $route.current.params.id;
+        .controller('Member', ['$scope', '$route', function ($scope, $route, member) {
+           $scope.member = member;
         }])
         .directive('paperInput', ['$sce', function ($sce) {
             return {
@@ -115,7 +115,8 @@
                     });
                 }
             };
-        }]).directive('dropZone',['$parse',function($parse){
+        }])
+        .directive('dropZone',['$parse',function($parse){
             return {
                 restrict:'A',
                 link:function(scope, element, attrs){
@@ -152,9 +153,11 @@
                     });
                 }
             };
-        }]).factory('members', ['$http','$q',function($http, $q){
+        }])
+        .factory('members', ['$http','$q',function($http, $q){
             return {
                 get:function(){
+                    debugger;
                     return $http.get('/members').then(function(result){
                         if(result.status !== 200){
                             return $q.reject(result);
@@ -163,7 +166,7 @@
                     });
                 }
             };
-        }]).function('member',['$http','$q', function($http, $q){
+        }]).factory('member',['$http','$q', function($http, $q){
             return {
                 get:function(email){
                     return $http.get('/members/' + email).then(function(result){
@@ -192,4 +195,4 @@
             };
         }]);
 
-}(this.angular, this.Polymer));
+}(this.angular));

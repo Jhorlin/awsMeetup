@@ -6,7 +6,7 @@
         </div>
 
     </div>
-    <div class="member card col-md-12" data-ng-repeat="member in members">
+    <div class="member card col-md-12 dn-fade-down" data-ng-repeat="member in members" data-ng-class="{new:member.new}">
         <paper-shadow>
             <div class="row">
                 <div class="col-md-12 text-center drop-zone" data-drop-zone="member.upload" data-drop-preview="member.preview">
