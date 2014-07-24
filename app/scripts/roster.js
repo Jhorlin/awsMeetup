@@ -159,7 +159,7 @@
         .factory('members', ['$http','$q',function($http, $q){
             return {
                 get:function(){
-                    return $http.get('/members').then(function(result){
+                    return $http.get('roster/members').then(function(result){
                         if(result.status !== 200){
                             return $q.reject(result);
                         }
@@ -170,7 +170,7 @@
         }]).factory('member',['$http','$q', function($http, $q){
             return {
                 get:function(email){
-                    return $http.get('/members/' + email).then(function(result){
+                    return $http.get('roster/members/' + email).then(function(result){
                         if(result.status !== 200){
                             return $q.reject(result);
                         }
@@ -178,7 +178,7 @@
                     });
                 },
                 add:function(email, member){
-                    return $http.post('/members/' + email, member).then(function(result){
+                    return $http.post('roster/members/' + email, member).then(function(result){
                         if(result.status !== 204){
                             return $q.reject(result);
                         }
@@ -186,7 +186,7 @@
                     });
                 },
                 update:function(email, member){
-                    return $http.post('/members/' + email, member).then(function(result){
+                    return $http.post('roster/members/' + email, member).then(function(result){
                         if(result.status !== 204){
                             return $q.reject(result);
                         }
