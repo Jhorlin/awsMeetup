@@ -22,7 +22,7 @@ if (!process.env.EB_NODE_COMMAND) {
     });
 
     var dynamoCredentials = {
-        credentials: { "accessKeyId": "AKIAJU27UJATL6JL4LTQ", "secretAccessKey": "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", "region": "us-east-1" },
+        credentials: { "accessKeyId": process.env.ACCESS_KEY_ID, "secretAccessKey": proces.env.SECRET_ACCESS_KEY, "region": "us-east-1" },
         client: {
             name: 'meetUP'
         }
